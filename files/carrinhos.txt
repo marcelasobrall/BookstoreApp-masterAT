@@ -1,0 +1,2 @@
+1;150.0;joao@email.com
+2;75.5;maria@email.com

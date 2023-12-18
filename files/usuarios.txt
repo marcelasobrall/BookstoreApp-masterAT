@@ -1,0 +1,3 @@
+Joao Silva;joao@email.com;senha123;Cliente;20010020
+Maria Oliveira;maria@email.com;senha456;Cliente;20010020
+admin;admin@email.com;admin123;Administrador;20010020

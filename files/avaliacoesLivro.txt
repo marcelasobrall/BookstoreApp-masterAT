@@ -1,0 +1,2 @@
+1;5;Excelente livro!;O Senhor dos Anéis;joao@email.com
+2;4;Muito bom;Harry Potter e a Pedra Filosofal;maria@email.com
