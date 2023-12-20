@@ -25,7 +25,7 @@ public class Usuario {
 	@JoinColumn(name = "carrinho_id", referencedColumnName = "id")
 	private CarrinhoDeCompras carrinho;
 
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
 
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)

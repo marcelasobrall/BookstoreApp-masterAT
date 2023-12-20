@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.math.BigDecimal;
 
 import br.edu.infnet.BookstoreApp.model.domain.ItemDeCarrinho;
+import br.edu.infnet.BookstoreApp.model.domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -14,6 +15,9 @@ import org.springframework.stereotype.Component;
 import br.edu.infnet.BookstoreApp.model.domain.CarrinhoDeCompras;
 import br.edu.infnet.BookstoreApp.model.service.CarrinhoDeComprasService;
 import br.edu.infnet.BookstoreApp.model.service.UsuarioService;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 @Order(4)
 @Component
@@ -25,7 +29,11 @@ public class CarrinhoDeComprasLoader implements ApplicationRunner {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private EntityManager entityManager;
+
     @Override
+    @Transactional
     public void run(ApplicationArguments args) throws Exception {
         FileReader file = new FileReader("files/carrinhos.txt");
         BufferedReader leitura = new BufferedReader(file);
@@ -42,7 +50,16 @@ public class CarrinhoDeComprasLoader implements ApplicationRunner {
                 carrinho.setTotal(total);
 
                 String emailCliente = campos[2];
-                carrinho.setCliente(usuarioService.obterPorEmail(emailCliente));
+                Usuario cliente = usuarioService.obterPorEmail(emailCliente);
+
+                if (cliente == null) {
+                    cliente = new Usuario();
+                    cliente.setEmail(emailCliente);
+                    entityManager.persist(cliente);
+                }
+
+                cliente = entityManager.merge(cliente);
+                carrinho.setCliente(cliente);
 
                 carrinhoService.incluir(carrinho);
             } catch (NumberFormatException e) {

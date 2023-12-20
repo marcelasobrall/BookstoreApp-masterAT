@@ -25,7 +25,6 @@ public class UsuarioService {
         usuario.setEndereco(endereco);
         usuarioRepository.save(usuario);
     }
-
     public Usuario obterPorEmail(String email) {
         return usuarioRepository.findByEmail(email);
     }
@@ -37,4 +36,5 @@ public class UsuarioService {
     public void excluir(Integer id) {
         usuarioRepository.deleteById(id);
     }
+
 }

@@ -34,9 +34,9 @@ public class UsuarioLoader implements ApplicationRunner {
             Endereco endereco = new Endereco();
 
             Usuario usuario = new Usuario();
-            usuario.setEmail(campos[0]);
-            usuario.setSenha(campos[1]);
-            usuario.setNome(campos[2]);
+            usuario.setEmail(campos[1]);
+            usuario.setSenha(campos[2]);
+            usuario.setNome(campos[0]);
             usuario.setEndereco(new Endereco(campos[4]));
 
             String tipoUsuarioString = campos[3].toUpperCase().trim();
@@ -55,7 +55,6 @@ public class UsuarioLoader implements ApplicationRunner {
 
         for (Usuario usuario : usuarioService.obterLista()) {
             System.out.println("[USUÁRIO] " + usuario);
-
         }
 
         leitura.close();
